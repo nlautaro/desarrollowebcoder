@@ -143,6 +143,10 @@ h2 {
     color:black;  
 }
 
+.button {
+    margin-right: 30px;
+}
+
 .formulario {
     display: flex;
     justify-content: center;
