@@ -1,3 +1,15 @@
+// DOM
+
+let producto = document.getElementById("productosdiv");
+productosdiv.innerHTML= "<h1> Productos</h1>";
+
+let div = document.getElementById("fondopolitica");
+console.log(div.innerHTML);
+div.style.background="gray";
+
+
+
+
 // ARRAYS PRODUCTOS
 
 function buscarProductos() {
