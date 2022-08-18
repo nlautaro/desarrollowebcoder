@@ -14,17 +14,27 @@ function interactuar(){
     alert("Lo sentimos, este producto no se encuentra con stock")
 }
 
+
 //CONTACTO FORMULARIO EVENTOS SUBMIT
 
-let formulario=document.getElementById("formulariocontacto");
+let formulario=document.getElementById("enviar");
+
 formulario.addEventListener("submit",confirmarInfo);
 
 function  confirmarInfo(ev) {
+    ev.preventDefault();
+    let nombre=document.getElementById("nombre").value;
+    let email=document.getElementById("email").value;
+
     if((nombre.value=="")||(email.value=="")){
-        ev.preventDefault();
+
         alert("Debe rellenar todo los campos para poder enviar su mensaje")
+    } else {
+        console.log("nombre").value;
+        console.log("email").value;
     }
 }
+
 
 // ARRAYS PRODUCTOS
 
