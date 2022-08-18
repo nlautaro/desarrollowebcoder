@@ -3,12 +3,28 @@
 let producto = document.getElementById("productosdiv");
 productosdiv.innerHTML= "<h1> Productos</h1>";
 
-let div = document.getElementById("fondopolitica");
-console.log(div.innerHTML);
-div.style.background="gray";
 
 
+//EVENTOS
 
+let productoNoStock= document.getElementById("soldout");
+productoNoStock.addEventListener("click", interactuar);
+
+function interactuar(){
+    alert("Lo sentimos, este producto no se encuentra con stock")
+}
+
+//CONTACTO FORMULARIO EVENTOS SUBMIT
+
+let formulario=document.getElementById("formulariocontacto");
+formulario.addEventListener("submit",confirmarInfo);
+
+function  confirmarInfo(ev) {
+    if((nombre.value=="")||(email.value=="")){
+        ev.preventDefault();
+        alert("Debe rellenar todo los campos para poder enviar su mensaje")
+    }
+}
 
 // ARRAYS PRODUCTOS
 
@@ -16,7 +32,6 @@ function buscarProductos() {
 
     const listaProductos=["buzo 1","buzo 2","buzo 3","buzo 4","pantalon 1", "pantalon 2"];
 console.log(listaProductos[7]);
-console.log(listaProductos);
 console.log("Cantidad de productos: "+listaProductos.length);
 for(let i=0;i<listaProductos.length;i++) {
     console.log("Posición de productos "+i+": " +listaProductos[i]);
@@ -35,7 +50,6 @@ if(posicion != -1) {
     alert("No se encuentra el producto que estás buscando")
 }
 }
-
 
 
 
@@ -75,7 +89,6 @@ if(posicion != -1) {
 
 
 
-
 // ARRAYS PANTALONES
 
 function buscarPantalon() {
@@ -108,7 +121,6 @@ if(posicion != -1) {
 
 
 
-
 // AGREGAR AL CARRO
 
 function agregarCarrito() {
@@ -119,4 +131,5 @@ while(cantidadCarrito!="0"){
     cantidadCarrito=prompt("Cuantos/as deseas agregar al carrito (escribe 0 para salir)");
 }
 console.log ("Has agregado "+total+"al carrito");
-alert("Has agregado "+total+"al carrito")}
+alert("Has agregado "+total+"al carrito")
+}
