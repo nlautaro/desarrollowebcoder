@@ -30,8 +30,8 @@ function  confirmarInfo(ev) {
 
         alert("Debe rellenar todo los campos para poder enviar su mensaje")
     } else {
-        console.log("nombre").value;
-        console.log("email").value;
+        console.log("nombre")
+        console.log("email")
     }
 }
 
