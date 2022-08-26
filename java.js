@@ -1,145 +1,134 @@
-// DOM
-
-let producto = document.getElementById("productosdiv");
-productosdiv.innerHTML= "<h1> Productos</h1>";
-
-
-
-//EVENTOS
-
-let productoNoStock= document.getElementById("soldout");
-productoNoStock.addEventListener("click", interactuar);
-
-function interactuar(){
-    alert("Lo sentimos, este producto no se encuentra con stock")
+class Producto {
+    constructor(id, nombre, precio, foto) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.foto = foto;
+    }
 }
 
-
-//CONTACTO FORMULARIO EVENTOS SUBMIT
-
-let formulario=document.getElementById("enviar");
-
-formulario.addEventListener("submit",confirmarInfo);
-
-function  confirmarInfo(ev) {
-    ev.preventDefault();
-    let nombre=document.getElementById("nombre").value;
-    let email=document.getElementById("email").value;
-
-    if((nombre.value=="")||(email.value=="")){
-
-        alert("Debe rellenar todo los campos para poder enviar su mensaje")
-    } else {
-        console.log("nombre")
-        console.log("email")
+class ElementoCarrito {
+    constructor(producto, cantidad) {
+        this.producto = producto;
+        this.cantidad = cantidad;
     }
 }
 
 
-// ARRAYS PRODUCTOS
+// ARRAYS
+const productos = [];
+const elementosCarrito = [];
 
-function buscarProductos() {
+const contenedorProductos = 
+    document.getElementById('contenedor-productos').getElementsByClassName('row');
 
-    const listaProductos=["buzo 1","buzo 2","buzo 3","buzo 4","pantalon 1", "pantalon 2"];
-console.log(listaProductos[7]);
-console.log("Cantidad de productos: "+listaProductos.length);
-for(let i=0;i<listaProductos.length;i++) {
-    console.log("Posición de productos "+i+": " +listaProductos[i]);
+const rowContenedorProductos = contenedorProductos[0];
+
+const contenedorCarritoCompras = document.querySelector("#items")
+
+//FUNCIONES
+
+cargarProductos();
+cargarCarrito();
+dibujarCarrito();
+dibujarCatalogoProductos();
+
+ function cargarProductos() {
+    productos.push(new Producto(1, 'Buzo 1', 65, './http://d3ugyf2ht6aenh.cloudfront.net/stores/001/490/877/products/b1-removebg-preview1-ae7c4bec9f2d25c3c216562767238890-640-0.png'));
+    productos.push(new Producto(2, 'Buzo 2', 60, './http://d3ugyf2ht6aenh.cloudfront.net/stores/001/490/877/products/b1-removebg-preview1-ae7c4bec9f2d25c3c216562767238890-640-0.png'));
+    productos.push(new Producto(3, 'Buzo 3', 60, './http://d3ugyf2ht6aenh.cloudfront.net/stores/001/490/877/products/b1-removebg-preview1-ae7c4bec9f2d25c3c216562767238890-640-0.png'));
+    productos.push(new Producto(4, 'Buzo 4', 60, './http://d3ugyf2ht6aenh.cloudfront.net/stores/001/490/877/products/b1-removebg-preview1-ae7c4bec9f2d25c3c216562767238890-640-0.pngg'));
+    productos.push(new Producto(5, 'Pantalon 1', 45, './http://d3ugyf2ht6aenh.cloudfront.net/stores/001/490/877/products/b1-removebg-preview1-ae7c4bec9f2d25c3c216562767238890-640-0.png'));
+    productos.push(new Producto(6, 'Pantalon 2', 45, './http://d3ugyf2ht6aenh.cloudfront.net/stores/001/490/877/products/b1-removebg-preview1-ae7c4bec9f2d25c3c216562767238890-640-0.png'));
 }
 
-//join string procutos
-let pasadoStringproductos=listaProductos.join(" | ");
-console.log(pasadoStringproductos);
+function cargarCarrito() {
+    let elementoCarrito = new ElementoCarrito(
+        new Producto(1, 'Buzo 1', 10000, './img/muffin.jpg'),
+        1
+    );
 
-// Indexof productos
-let buscar=prompt("Ingresa el producto que estas buscando").toLowerCase();
-let posicion=listaProductos.indexOf(buscar);
-if(posicion != -1) {
-    alert(buscar+" se encuentra en la posición numero "+posicion)
-} else {
-    alert("No se encuentra el producto que estás buscando")
-}
+    elementosCarrito.push(elementoCarrito);
 }
 
+function dibujarCarrito() {
+    let renglonesCarrito = '';
 
+    elementosCarrito.forEach(
+        (elemento) => {
+            renglonesCarrito+=`
+                <tr>
+                    <td>${elemento.producto.id}</td>
+                    <td>${elemento.producto.nombre}</td>
+                    <td>${elemento.cantidad}</td>
+                    <td>$ ${elemento.producto.precio}</td>
+                </tr>
+            `;
+        }
+    );
 
-// ARRAYS BUZOS
+    contenedorCarritoCompras.innerHTML = renglonesCarrito;
 
-function buscarBuzo() {
-
-    const listaBuzos=["buzo 1","buzo 2","buzo 3","buzo 4"];
-console.log(listaBuzos[5]);
-console.log(listaBuzos);
-
-console.log("Cantidad de productos: "+listaBuzos.length);
-
-for(let i=0;i<listaBuzos.length;i++){
-    console.log("Posición de productos "+i+": " +listaBuzos[i]);
 }
 
-//push buzos
+function crearCard(producto) {
+    // BOTON
+    let botonAgregar = document.createElement("button");
+    botonAgregar.className = "btn btn-success";
+    botonAgregar.innerText = "Agregar al carrito";
 
-listaBuzos.push("buzo nuevo");
-console.log(listaBuzos);
+    // CUERPO DE LA CARD
+    let cuerpoCarta = document.createElement("div");
+    cuerpoCarta.className = "card-body";
+    cuerpoCarta.innerHTML = `
+        <h5>${producto.nombre}</h5>
+        <p>$ ${producto.precio} ARS</p>
+    `;
+    cuerpoCarta.append(botonAgregar);
 
-//join string buzos
+    // IMAGEN 
+    let imagen = document.createElement("img");
+    imagen.src = producto.foto;
+    imagen.className = "card-img-top";
+    imagen.alt = producto.nombre;
 
-let pasadoStringbuzos=listaBuzos.join(" | ");
-console.log(pasadoStringbuzos);
+    // CARD
+    let carta = document.createElement("div");
+    carta.className = "card";
+    carta.append(imagen);
+    carta.append(cuerpoCarta);
 
-// Indexof buzos
-let buscar=prompt("Ingresa el producto que estas buscando").toLowerCase();
-let posicion=listaBuzos.indexOf(buscar);
-if(posicion != -1) {
-    alert(buscar+" se encuentra en la posición numero "+posicion)
-} else {
-    alert("No se encuentra el producto que estás buscando")
-}
-}
+    // CONTENEDOR CARD
+    let contenedorCarta = document.createElement("div");
+    contenedorCarta.className = "col-xs-6 col-sm-4 col-md-3";
+    contenedorCarta.append(carta);
 
 
 
-// ARRAYS PANTALONES
+    botonAgregar.onclick = () => {
 
-function buscarPantalon() {
+        let elementoCarrito = new ElementoCarrito(producto, 1);
+        elementosCarrito.push(elementoCarrito);
 
-    const listaPantalones=["pantalon 1", "pantalon 2"];
-console.log(listaPantalones[3]);
-console.log(listaPantalones);
-console.log("Cantidad de productos: "+listaPantalones.length);
-for(let i=0;i<listaPantalones.length;i++) {
-    console.log("Posición de productos "+i+": " +listaPantalones[i]);
-}
+        dibujarCarrito();A
 
-//push pantalones
-listaPantalones.push("pantalon nuevo");
-console.log(listaPantalones);
+    } 
+    
+    return contenedorCarta;
 
-//join string pantalones
-let pasadoStringpantalones=listaPantalones.join(" | ");
-console.log(pasadoStringpantalones);
-
-// Indexof pantalones
-let buscar=prompt("Ingresa el producto que estas buscando").toLowerCase();
-let posicion=listaPantalones.indexOf(buscar);
-if(posicion != -1) {
-    alert(buscar+" se encuentra en la posición numero "+posicion)
-} else {
-    alert("No se encuentra el producto que estás buscando")
-}
 }
 
+function dibujarCatalogoProductos() {
+    rowContenedorProductos.innerHTML = "";
 
+    productos.forEach(
+        (producto) => {
+            let contenedorCarta = crearCard(producto);
+            rowContenedorProductos.append(contenedorCarta);
+        }
+    );
 
-// AGREGAR AL CARRO
-
-function agregarCarrito() {
-    let cantidadCarrito= prompt("Cuantos/as deseas agregar al carrito (escribe 0 para salir)");
-let total=""
-while(cantidadCarrito!="0"){
-    total=total + cantidadCarrito + " ";
-    cantidadCarrito=prompt("Cuantos/as deseas agregar al carrito (escribe 0 para salir)");
 }
-console.log ("Has agregado "+total+"al carrito");
-alert("Has agregado "+total+"al carrito")
-}
+
+
+
