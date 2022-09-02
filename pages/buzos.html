@@ -30,8 +30,51 @@
                 <li><a href="./pantalones.html">Pantalones</a></li>
                 <li><a href="./proximamente.html">Shorts</a></li>
                 <li><a href="./proximamente.html">Accesorios</a></li>
+                <button type="button" class="btn btn-secondary" onclick='buscarProductos()'>Buscar</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+                  Carrito <i class="bi bi-bag-check-fill"></i>
+              </button>
+              <!-- MODAL -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Carrito</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <div class="container">
+                      <table class="table">
+                          <thead>
+                              <tr>
+                              <th scope="col">ID</th>
+                              <th scope="col">Nombre</th>
+                              <th scope="col">Cantidad</th>
+                              <th scope="col">Total</th>
+                              </tr>
+                          </thead>
+                          <tbody id="items"></tbody>
+                          <tfoot>
+                              <tr id="footer">
+                              <th scope="row" colspan="5">Actualmente no hay ningún producto en el carrito</th>
+                              </tr>
+                          </tfoot>
+                          </table>
+                      <div class="row" id="cards"></div>
+                  </div>
+              
+              </div>
+              <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary">Comprar</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
             </ul>
         </div>
+
     </nav>
   </header>
   
@@ -43,7 +86,7 @@
         <div class="card-body">
           <h5 class="card-title">Buzo 1 <span class="badge bg-secondary">New</span></h5>
           <p class="card-text">$10000 ARS</p>
-          <button onclick='agregarCarrito()' class="btn btn-primary">Añadir al carro</button>
+          <button class="btn btn-primary">Añadir al carro</button>
         </div>
       </div>
     
@@ -70,7 +113,7 @@
         <div class="card-body">
           <h5 class="card-title">Buzo 4</h5>
           <p class="card-text">$10000 ARS</p>
-          <button onclick='agregarCarrito()' class="btn btn-primary">Añadir al carro</button>
+          <button class="btn btn-primary">Añadir al carro</button>
         </div>
       </div>
 

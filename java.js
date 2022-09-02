@@ -1,134 +1,49 @@
-class Producto {
-    constructor(id, nombre, precio, foto) {
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.foto = foto;
+let carrito=JSON.parse(localStorage.getItem("carrito"))||[];
+let lista=document.getElementById("milista");
+
+renderizarProductos();
+
+function renderizarProductos() {
+    for (const producto of productos) {
+        lista.innerHTML+=`<li data-aos="flip-left" class="col-sm-3 list-group-item">
+        <img src=${producto.foto} width="250" height="290">
+        <h4> Producto: ${producto.nombre}</h4>
+        <h5> $ ${producto.precio} </h5>
+        <button class='btn btn-success' id='btn${producto.id}'>Agregar al carro</button>
+        </li>`;
     }
+
+    //eventos
+
+    productos.forEach(producto => {
+        //Evento para cada boton
+        document.getElementById(`btn${producto.id}`).addEventListener('click', function() {
+            agregarAlCarrito(producto);
+        });
+    });
 }
 
-class ElementoCarrito {
-    constructor(producto, cantidad) {
-        this.producto = producto;
-        this.cantidad = cantidad;
-    }
-}
-
-
-// ARRAYS
-const productos = [];
-const elementosCarrito = [];
-
-const contenedorProductos = 
-    document.getElementById('contenedor-productos').getElementsByClassName('row');
-
-const rowContenedorProductos = contenedorProductos[0];
-
-const contenedorCarritoCompras = document.querySelector("#items")
-
-//FUNCIONES
-
-cargarProductos();
-cargarCarrito();
-dibujarCarrito();
-dibujarCatalogoProductos();
-
- function cargarProductos() {
-    productos.push(new Producto(1, 'Buzo 1', 65, './http://d3ugyf2ht6aenh.cloudfront.net/stores/001/490/877/products/b1-removebg-preview1-ae7c4bec9f2d25c3c216562767238890-640-0.png'));
-    productos.push(new Producto(2, 'Buzo 2', 60, './http://d3ugyf2ht6aenh.cloudfront.net/stores/001/490/877/products/b1-removebg-preview1-ae7c4bec9f2d25c3c216562767238890-640-0.png'));
-    productos.push(new Producto(3, 'Buzo 3', 60, './http://d3ugyf2ht6aenh.cloudfront.net/stores/001/490/877/products/b1-removebg-preview1-ae7c4bec9f2d25c3c216562767238890-640-0.png'));
-    productos.push(new Producto(4, 'Buzo 4', 60, './http://d3ugyf2ht6aenh.cloudfront.net/stores/001/490/877/products/b1-removebg-preview1-ae7c4bec9f2d25c3c216562767238890-640-0.pngg'));
-    productos.push(new Producto(5, 'Pantalon 1', 45, './http://d3ugyf2ht6aenh.cloudfront.net/stores/001/490/877/products/b1-removebg-preview1-ae7c4bec9f2d25c3c216562767238890-640-0.png'));
-    productos.push(new Producto(6, 'Pantalon 2', 45, './http://d3ugyf2ht6aenh.cloudfront.net/stores/001/490/877/products/b1-removebg-preview1-ae7c4bec9f2d25c3c216562767238890-640-0.png'));
-}
-
-function cargarCarrito() {
-    let elementoCarrito = new ElementoCarrito(
-        new Producto(1, 'Buzo 1', 10000, './img/muffin.jpg'),
-        1
+function agregarAlCarrito(productoNuevo) {
+    carrito.push(productoNuevo);
+    console.log(carrito);
+    Swal.fire(
+        productoNuevo.nombre,
+        'Ha sido añadido al carro!',
+        'success'
     );
-
-    elementosCarrito.push(elementoCarrito);
+    document.getElementById("tablabody").innerHTML+=`
+    <tr data-aos="fade-left">
+        <td>${productoNuevo.id}</td>
+        <td>${productoNuevo.nombre}</td>
+        <td>${productoNuevo.precio}</td>
+    </tr>`;
+    localStorage.setItem("carrito",JSON.stringify(carrito));
 }
 
-function dibujarCarrito() {
-    let renglonesCarrito = '';
-
-    elementosCarrito.forEach(
-        (elemento) => {
-            renglonesCarrito+=`
-                <tr>
-                    <td>${elemento.producto.id}</td>
-                    <td>${elemento.producto.nombre}</td>
-                    <td>${elemento.cantidad}</td>
-                    <td>$ ${elemento.producto.precio}</td>
-                </tr>
-            `;
-        }
-    );
-
-    contenedorCarritoCompras.innerHTML = renglonesCarrito;
-
-}
-
-function crearCard(producto) {
-    // BOTON
-    let botonAgregar = document.createElement("button");
-    botonAgregar.className = "btn btn-success";
-    botonAgregar.innerText = "Agregar al carrito";
-
-    // CUERPO DE LA CARD
-    let cuerpoCarta = document.createElement("div");
-    cuerpoCarta.className = "card-body";
-    cuerpoCarta.innerHTML = `
-        <h5>${producto.nombre}</h5>
-        <p>$ ${producto.precio} ARS</p>
-    `;
-    cuerpoCarta.append(botonAgregar);
-
-    // IMAGEN 
-    let imagen = document.createElement("img");
-    imagen.src = producto.foto;
-    imagen.className = "card-img-top";
-    imagen.alt = producto.nombre;
-
-    // CARD
-    let carta = document.createElement("div");
-    carta.className = "card";
-    carta.append(imagen);
-    carta.append(cuerpoCarta);
-
-    // CONTENEDOR CARD
-    let contenedorCarta = document.createElement("div");
-    contenedorCarta.className = "col-xs-6 col-sm-4 col-md-3";
-    contenedorCarta.append(carta);
 
 
 
-    botonAgregar.onclick = () => {
 
-        let elementoCarrito = new ElementoCarrito(producto, 1);
-        elementosCarrito.push(elementoCarrito);
-
-        dibujarCarrito();A
-
-    } 
-    
-    return contenedorCarta;
-
-}
-
-function dibujarCatalogoProductos() {
-    rowContenedorProductos.innerHTML = "";
-
-    productos.forEach(
-        (producto) => {
-            let contenedorCarta = crearCard(producto);
-            rowContenedorProductos.append(contenedorCarta);
-        }
-    );
-
-}
 
 
 
