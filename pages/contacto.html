@@ -45,34 +45,26 @@
 
     <aside class="formulario">
 
-        <form id="formulariocontacto" action="" method="GET" enctype="multipart/form-data">
-    
-            <fieldset>
-    
+        <form id="my-form" action="https://formspree.io/f/xbjbdzbw" method="POST">
+
+
                 <legend><strong>¿Necesitas ayuda o tenés alguna duda?</strong></legend>
     
-                <br>
-    
-                <div class="escribir">
-                <label>Nombre y apellido</label>
-                <input id="nombre" type="text" placeholder="Nombre y apellido" required>
-                </div>
-    
-                
-                <div  class="escribir">
-                    <label>Email</label>
-                <input type="text" id="email" placeholder="Correo o teléfono" required>
-                </div>
-        
-                <div class="escribir">
-                <textarea placeholder="Escríbenos..." cols="50" rows="5" required></textarea>
-                </div>
-    
-            </fieldset>
-    
-            <div class="formulario">
-                <button type="submit" class='btn btn-success' id="enviar"> Enviar </button>
+            <div class="escribir">
+                <label>Email</label>
+                <input type="email" name="email" />
             </div>
+
+            <div class="escribir">
+                <label>Mensaje</label>
+                <input type="text" name="message" />
+            </div>
+  
+            <div class="formulario">
+                <button class="btn btn-success" id="my-form-button">Enviar</button>
+                <p id="my-form-status"></p>
+            </div>
+
     
         </form>
     
@@ -135,6 +127,7 @@
 <!-- SWEET ALERT -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!--JAVASCRIPT-->
+<script src="../apis.js"></script>
 <script src="../productos.js"></script>
 <script src="../java.js"></script>
 
