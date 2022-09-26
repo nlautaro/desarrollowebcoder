@@ -120,24 +120,58 @@ ul li:hover ul {
     size: 150px;
 }
 
-.cartas {
+.contenedor-productos {
+    max-width: 1200px;
+    margin: 60px auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.boton-carro {
+    border: none;
+    font-size: 35px;
+    background-color: white;
+    border-radius: 10%;
+    padding: 10px 10px;
+    transition: all. 2s;
+}
+
+.boton-carro:hover {
+    background-color: black;
+    color:white;
+    cursor: pointer;
+}
+
+.bx-cart {
     display: flex;
     justify-content: center;
-}
-
-.card:hover {
-    transform: scale(1.05)   
-}
-
-.card {
-    display: flex;
     align-items: center;
-    margin: 10px;
+    font-size: 30px;
 }
 
-.card-body {
-    margin: 0px;
+.bx-cart-add {
+    font-size: 18px;
+    align-items: center;
 }
+
+.producto {
+    max-width: 20%;
+    padding: 10px;
+    margin: 20px;
+    margin-bottom: 20px;
+}
+
+.talles {
+    margin-top: -5px;
+}
+
+.precioProducto {
+    margin-top: -15px;
+    font-weight: 700;
+}
+
+.precioTotal {}
 
 h2 { 
     color:black;  
