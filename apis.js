@@ -14,7 +14,16 @@ var form = document.getElementById("my-form");
         }
       }).then(response => {
         if (response.ok) {
-          status.innerHTML = "Se ha enviado tu mail";
+          status.innerHTML = 
+          
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Enviado correctamente!',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          
           form.reset()
         } else {
           response.json().then(data => {

@@ -83,3 +83,5 @@ const actualizarCarrito = () => {
     localStorage.setItem('carrito', JSON.stringify(carrito))
 
 }
+
+

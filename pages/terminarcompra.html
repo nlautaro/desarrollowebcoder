@@ -32,15 +32,6 @@
                     <ul id="#ulNav">
                         <li><a href="../index.html">Inicio</a></li>
                         <li><a href="./productos.html">Productos</a>
-                            <ul class="submenu">
-                                <li><a href="./buzos.html">Buzos</a></li>
-                                <li><a href="./proximamente.html">Camperas</a></li>
-                                <li><a href="./proximamente.html">Remeras</a></li>
-                                <li><a href="./pantalones.html">Pantalones</a></li>
-                                <li><a href="./proximamente.html">Shorts</a></li>
-                                <li><a href="./proximamente.html">Accesorios</a></li>
-                            </ul>
-                        </li>
                         <li><a href="./contacto.html">Contacto</a></li>
                         <li><a href="./politicadedevolucion.html">Política de devolución</a></li>
                     </ul>
@@ -53,7 +44,42 @@
 
     </header>
 
-    <h2 class="proximamente">Proximamente...</h2>
+    <aside class="formulario">
+
+        <form id="my-form" action="https://formspree.io/f/xbjbdzbw" method="POST">
+
+
+                <legend><strong>Coloca tus datos aquí</strong></legend>
+    
+            <div class="escribir">
+                <label>Email</label>
+                <input type="email" name="email" />
+            </div>
+
+            <div class="escribir">
+                <label>Número de tarjeta</label>
+                <input type="number" name="number" />
+            </div>
+
+            <div class="escribir">
+                <label>Número de teléfono</label>
+                <input type="number" name="number" />
+            </div>
+
+            <div class="escribir">
+                <label>Domicilio</label>
+                <input type="text" name="text" />
+            </div>
+  
+            <div class="formulario">
+                <button class="btn btn-success" id="my-form-button">Finalizar Compra</button>
+                <p id="my-form-status"></p>
+            </div>
+
+    
+        </form>
+    
+    </aside>
 
     <a class="volver" href="../index.html">Volver al inicio</a>
 
@@ -117,6 +143,8 @@
     
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <!--JAVASCRIPT-->
+    <script src="../apis.js"></script>
     <script src="../java.js"></script>
 </body>
 

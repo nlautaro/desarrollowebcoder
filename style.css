@@ -134,7 +134,7 @@ ul li:hover ul {
     background-color: white;
     border-radius: 10%;
     padding: 10px 10px;
-    transition: all. 2s;
+    transition: all 0.5s;
 }
 
 .boton-carro:hover {
